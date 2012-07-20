@@ -1,0 +1,3 @@
+[submodule "nestedSortable"]
+	path = nestedSortable
+	url = https://github.com/mjsarfatti/nestedSortable.git
