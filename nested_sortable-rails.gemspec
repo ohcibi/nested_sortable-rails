@@ -7,11 +7,11 @@ require "nested_sortable-rails/version"
 Gem::Specification.new do |s|
   s.name        = "nested_sortable-rails"
   s.version     = NestedSortableRails::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of NestedSortableRails."
-  s.description = "TODO: Description of NestedSortableRails."
+  s.authors     = ["ohcibi"]
+  s.email       = ["ich@dwgadf.de"]
+  s.homepage    = "https://github.com/ohcibi/nested_sortable-rails"
+  s.summary     = "Packages the nestedSortable-jquery-ui extension"
+  s.description = "Packages the nestedSortable extension from Manuele J Sarfatti (https://github.com/mjsarfatti/nestedSortable). Check out his page on github to learn more."
 
   s.files = Dir["{app,config,db,lib,vendor}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
