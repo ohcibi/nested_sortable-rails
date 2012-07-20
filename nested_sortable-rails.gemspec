@@ -18,8 +18,4 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.2.6"
   s.add_dependency "jquery-ui-rails"
   s.add_dependency "railties"
-
-  s.add_development_dependency "sqlite3"
-  s.add_development_dependency "rspec-rails"
-  s.add_development_dependency "capybara"
 end

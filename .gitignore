@@ -1,8 +1,7 @@
 .bundle/
 log/*.log
 pkg/
-spec/dummy/db/*.sqlite3
-spec/dummy/log/*.log
-spec/dummy/tmp/
-spec/dummy/.sass-cache
-Gemfile.lock
+testapp/db/*.sqlite3
+testapp/log/*.log
+testapp/tmp/
+testapp/.sass-cache

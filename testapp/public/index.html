@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+  <head>
+    <title>NestedSortableRails Test</title>
+    <style type="text/css">
+      body {
+        -webkit-border-radius: 10px;
+           -moz-border-radius: 10px;
+                border-radius: 10px;
+        color: #444;
+        background-color: #fff;
+        font-size: 13px;
+        font-family: Freesans, sans-serif;
+        padding: 2em 4em;
+        width: 860px;
+        margin: 15px auto;
+        box-shadow: 1px 1px 8px #444;
+        -mox-box-shadow: 1px 1px 8px #444;
+        -webkit-box-shadow: 1px -1px 8px #444;
+      }
+      .placeholder {
+        border: 1px dashed #4183C4;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+      }
+
+      .mjs-nestedSortable-error {
+        background: #fbe3e4;
+        border-color: transparent;
+      }
+
+      ol {
+        margin: 0;
+        padding: 0;
+        padding-left: 30px;
+      }
+
+      ol.sortable, ol.sortable ol {
+        margin: 0 0 0 25px;
+        padding: 0;
+        list-style-type: none;
+      }
+
+      ol.sortable {
+        margin: 4em 0;
+      }
+
+      .sortable li {
+        margin: 5px 0 0 0;
+        padding: 0;
+      }
+
+      .sortable li div  {
+        border: 1px solid #d4d4d4;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        border-color: #D4D4D4 #D4D4D4 #BCBCBC;
+        padding: 6px;
+        margin: 0;
+        cursor: move;
+        background: #f6f6f6;
+        background: -moz-linear-gradient(top,  #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#ededed));
+        background: -webkit-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+        background: -o-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+        background: -ms-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+        background: linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 );
+
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Nested Sortable Test</h1>
+    <p>This is a test page for the nested_sortable-rails plugin. It serves the nestedSortable jquery-ui-extension from Manuele J Sarfatti. Visit <a href="http://mjsarfatti.com/sandbox/nestedSortable/">his page</a> or <a href="https://github.com/mjsarfatti/nestedSortable">his page on github</a> to learn more. The HTML, JS and the CSS of this testpage is carelessly stolen from <a href="http://mjsarfatti.com/sandbox/nestedSortable/">his page</a></p>
+    <section id="demo">
+      <ol class="sortable">
+        <li id="list_1"><div>Item 1</div>
+          <ol>
+            <li id="list_2"><div>Sub Item 1.1</div>
+            <li id="list_3"><div>Sub Item 1.2</div>
+          </ol>
+        <li id="list_4" class="no-nest"><div>Item 2 (no-nesting)</div>
+        <li id="list_5"><div>Item 3</div>
+          <ol>
+            <li id="list_6" class="no-nest"><div>Sub Item 3.1 (no-nesting)</div>
+            <li id="list_7"><div>Sub Item 3.2</div>
+              <ol>
+                <li id="list_8"><div>Sub Item 3.2.1</div>
+              </ol>
+          </ol>
+        <li id="list_9"><div>Item 4</div>
+        <li id="list_10"><div>Item 5</div>
+      </ol>
+
+      <h3>Try the custom methods:</h3>
+
+      <p><br />
+        <input type="submit" name="serialize" id="serialize" value="Serialize" />
+      <pre id="serializeOutput"></pre>
+
+      <p>
+        <input type="submit" name="toArray" id="toArray" value="To array" />
+      <pre id="toArrayOutput"></pre>
+
+      <p>
+        <input type="submit" name="toHierarchy" id="toHierarchy" value="To hierarchy" />
+      <pre id="toHierarchyOutput"></pre>
+      <p>
+        <em>Note: This demo has the <code>maxLevels</code> option set to '3'.</em>
+      </p>
+    </section> <!-- END #demo -->
+    <script src="assets/nested_sortable.js"></script>
+    <script>
+      $(document).ready(function(){
+
+        $('ol.sortable').nestedSortable({
+          disableNesting: 'no-nest',
+          forcePlaceholderSize: true,
+          handle: 'div',
+          helper:	'clone',
+          items: 'li',
+          maxLevels: 3,
+          opacity: .6,
+          placeholder: 'placeholder',
+          revert: 250,
+          tabSize: 25,
+          tolerance: 'pointer',
+          toleranceElement: '> div'
+        });
+
+        $('#serialize').click(function(){
+          serialized = $('ol.sortable').nestedSortable('serialize');
+          $('#serializeOutput').text(serialized+'\n\n');
+        })
+
+        $('#toHierarchy').click(function(e){
+          hiered = $('ol.sortable').nestedSortable('toHierarchy', {startDepthCount: 0});
+          hiered = dump(hiered);
+          (typeof($('#toHierarchyOutput')[0].textContent) != 'undefined') ?
+          $('#toHierarchyOutput')[0].textContent = hiered : $('#toHierarchyOutput')[0].innerText = hiered;
+        })
+
+        $('#toArray').click(function(e){
+          arraied = $('ol.sortable').nestedSortable('toArray', {startDepthCount: 0});
+          arraied = dump(arraied);
+          (typeof($('#toArrayOutput')[0].textContent) != 'undefined') ?
+          $('#toArrayOutput')[0].textContent = arraied : $('#toArrayOutput')[0].innerText = arraied;
+        })
+
+      });
+
+      function dump(arr,level) {
+        var dumped_text = "";
+        if(!level) level = 0;
+
+        //The padding given at the beginning of the line.
+        var level_padding = "";
+        for(var j=0;j<level+1;j++) level_padding += "    ";
+
+        if(typeof(arr) == 'object') { //Array/Hashes/Objects
+          for(var item in arr) {
+            var value = arr[item];
+
+            if(typeof(value) == 'object') { //If it is an array,
+              dumped_text += level_padding + "'" + item + "' ...\n";
+              dumped_text += dump(value,level+1);
+            } else {
+              dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
+            }
+          }
+        } else { //Strings/Chars/Numbers etc.
+          dumped_text = "===>"+arr+"<===("+typeof(arr)+")";
+        }
+        return dumped_text;
+      }
+    </script>
+  </body>
+</html>
