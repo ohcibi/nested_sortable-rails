@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "Packages the nestedSortable-jquery-ui extension"
   s.description = "Packages the nestedSortable extension from Manuele J Sarfatti (https://github.com/mjsarfatti/nestedSortable). Check out his page on github to learn more."
 
-  s.files = Dir["{app,config,db,lib,vendor}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib,vendor}/**/*"] + ["MIT-LICENSE", "Rakefile", "Readme.md"]
 
   s.add_dependency "rails", "~> 3.2.6"
   s.add_dependency "jquery-ui-rails"
