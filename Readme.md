@@ -24,3 +24,8 @@ TODO
 
 * Find out how to test this properly with RSpec. My Problem was that the plugin js could not load `jquery.ui.sortable` with sprockets.
 * Release as gem
+
+License
+-------
+
+This work is licensed under the MIT License.
